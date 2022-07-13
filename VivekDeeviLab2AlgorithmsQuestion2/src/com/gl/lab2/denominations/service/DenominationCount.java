@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DenominationCount {
 
-	static int NUM_ELEMENTS, AMOUNT;
+	static int NUM_ELEMENTS, AMOUNT,NOTPOSSIBLE;
 	static int denominationArray[], notesFrequency[];
 	 boolean status = false;
 	Scanner sc = new Scanner(System.in);
@@ -19,8 +19,10 @@ public class DenominationCount {
 		sortArray();
 		System.out.println("Enter the amount you want to pay");
 		AMOUNT = sc.nextInt();
+		NOTPOSSIBLE=0;
 		countNotes();
-		printDenominations();
+		if (NOTPOSSIBLE ==0)
+			printDenominations();
 	}
 
 	void insertValues() {
@@ -45,8 +47,10 @@ public class DenominationCount {
 	
 	static void countNotes() {
 
-		if (AMOUNT < denominationArray[0])
+		if (AMOUNT < denominationArray[0]) {
 			System.out.println("Target not possible!");
+			NOTPOSSIBLE=1;
+		}
 		else {
 			for (int i = 0; i < NUM_ELEMENTS; i++) {
 				if (AMOUNT >= denominationArray[i]) {
